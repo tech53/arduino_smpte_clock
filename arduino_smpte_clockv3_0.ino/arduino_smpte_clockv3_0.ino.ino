@@ -31,7 +31,7 @@ volatile unsigned char lastLevel = 0;
 
 // Default configuration
 volatile uint8_t selectedFPS = FPS_30;
-volatile uint8_t selectedPPQN = 24;  // Default PPQN
+volatile uint16_t selectedPPQN = 24;  // Default PPQN
 volatile bool displaySMPTE = true;   // Default display type
 
 // MIDI settings
@@ -74,13 +74,11 @@ const uint8_t smpteFpsOptions[] = {FPS_24, FPS_25, FPS_30, FPS_2997};
 const char *smpteFpsLabels[] = {"24 FPS", "25 FPS", "30 FPS", "29.97 FPS"};
 
 // MIDI PPQN options for modern and retro gear
-const uint8_t midiPpqnOptions[] = {24, 48, 96, 120, 192};
+const uint16_t midiPpqnOptions[] = {1, 2, 4, 8, 16, 24, 32, 48, 64, 96, 128, 192, 256, 384, 512, 768, 960};
 const char *midiPpqnLabels[] = {
-    "24 PPQN (Default)",
-    "48 PPQN",
-    "96 PPQN",
-    "120 PPQN",
-    "192 PPQN"
+    "1 PPQN", "2 PPQN", "4 PPQN", "8 PPQN", "16 PPQN", "24 PPQN (Default)",
+    "32 PPQN", "48 PPQN", "64 PPQN", "96 PPQN", "128 PPQN", "192 PPQN",
+    "256 PPQN", "384 PPQN", "512 PPQN", "768 PPQN", "960 PPQN"
 };
 
 // Display type options
@@ -429,7 +427,7 @@ void displayMenu() {
       }
       break;
     case MENU_MIDI_PPQN:
-      for (int i = 0; i < 5; i++) {
+      for (int i = 0; i < 17; i++) {
         display.println(menuSelectedItem == i ? ("> " + String(midiPpqnLabels[i])).c_str() : ("  " + String(midiPpqnLabels[i])).c_str());
       }
       break;
